@@ -1,0 +1,30 @@
+INSERT
+$query_insert = mysqli_query($classDataBaseConnection->connect(),"INSERT INTO person_tbl (person_first_name, person_last_name) VALUES ('$this->firstName', '$this->lastName')");
+
+// DISPLAY
+$fetch_data = mysqli_query($classDataBaseConnection->connect(), "SELECT * FROM person_tbl");
+while($row = mysqli_fetch_assoc($fetch_data)){
+    $db_person_id = $row["person_id"];
+    $db_person_first_name = $row["person_first_name"];
+    $db_person_last_name = $row["person_last_name"];
+
+    echo"
+        <table>
+            <tr>
+                <td>$db_person_id</td>
+                <td>$db_person_first_name</td>
+                <td>$db_person_last_name</td>
+                <td><button id='edit' data-id='$db_person_id'>Edit</button></td>
+                <td><button id='delete' data-id='$db_person_id'>Delete</button></td>
+            </tr>
+        </table>
+    ";
+}
+
+UPDATE
+$query_update = mysqli_query($classDataBaseConnection->connect(),"UPDATE user_verification_tbl SET uvt_email_code = '$sixDigitRandomCode' WHERE uvt_email ='$this->email'");
+
+DELETE
+$query_delete = mysqli_query($classDataBaseConnection->connect(),"DELETE FROM person_tbl WHERE person_id = '$this->deleteID'");
+
+
